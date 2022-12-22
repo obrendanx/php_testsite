@@ -9,7 +9,7 @@ define('SAFE_TO_RUN', true);
 
 // TODO: Change these values to configure the application
 $database_table = "user"; // name of database table to read/write
-$app_title = 'phptestsite - home';
+$app_title = 'phptestsite - login';
 
 // Setup flags and other variables used in the application
 $url = $_SERVER["PHP_SELF"]; // URL of this page for forms to POST to
@@ -19,18 +19,32 @@ $data = []; // key/value data from form submission
 
 
 // Define _e and _x functions
-require 'admin/helpers.php';
+require '../admin/helpers.php';
 // Output head of page
-require 'admin/head.php';
+require '../admin/head.php';
 ?>
 
-<nav>
+<form action="../auth/login.php" method="post">
 
-    <ul>
-        <li><a href="/pages/loginform.php">Login</a></li>
-    </ul>
+        <h2>LOGIN</h2>
 
-</nav>
+        <?php if (isset($_GET['error'])) { ?>
+
+            <p class="error"><?php echo $_GET['error']; ?></p>
+
+        <?php } ?>
+
+        <label>User Name</label>
+
+        <input type="text" name="username" placeholder="User Name"><br>
+
+        <label>Password</label>
+
+        <input type="password" name="password" placeholder="Password"><br> 
+
+        <button type="submit">Login</button>
+
+     </form>
 
 </body>
 

@@ -1,11 +1,14 @@
 <?php
-define('SAFE_TO_RUN', true);
+if (!defined('SAFE_TO_RUN')) {
+    // Prevent direct execution - show a warning instead
+    die(basename(__FILE__)  . ' cannot be executed directly!');
+}
 ?>
 
 <?php
 session_start(); 
 
-include "admin/connect.php";
+include "../admin/connect.php";
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
 
@@ -39,7 +42,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     }else{
 
-        $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
+        $sql = "SELECT * FROM users WHERE username='$uname' AND password='$pass'";
 
         $result = mysqli_query($conn, $sql);
 
@@ -53,8 +56,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
                 $_SESSION['username'] = $row['username'];
 
-                $_SESSION['name'] = $row['name'];
-
                 $_SESSION['id'] = $row['id'];
 
                 header("Location: index.php");
@@ -63,7 +64,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
             }else{
 
-                header("Location: index.php?error=Incorect User name or password");
+                header("Location: loginform.php?error=Incorect User name or password");
 
                 exit();
 
@@ -71,7 +72,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         }else{
 
-            header("Location: index.php?error=Incorect User name or password");
+            header("Location: loginform.php?error=Incorect User name or password");
 
             exit();
 
