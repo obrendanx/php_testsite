@@ -1,11 +1,5 @@
 <?php
-// "require" this file to output a form to add or edit data
-
-// For security, required PHP files should "die" if SAFE_TO_RUN is not defined
-if (!defined('SAFE_TO_RUN')) {
-    // Prevent direct execution - show a warning instead
-    die(basename(__FILE__)  . ' cannot be executed directly!');
-}
+define('SAFE_TO_RUN', true);
 ?>
 
 <?php
